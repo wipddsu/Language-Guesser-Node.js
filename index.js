@@ -1,12 +1,11 @@
 const franc = require('franc');
-const lang = require('./nodejs-langs');
-const input = [];
-let result;
-
-for (let i = 2; i < process.argv.length; i++) {
-  input.push(process.argv[i]);
+const langs = require('langs');
+const colors = require('colors');
+const input = process.argv[2];
+const langCode = franc(input);
+if (langCode === 'und') {
+  console.log("SORRY, COULDN'T FIGURE IT OUT! TRY WITH MORE SAMPLE TEXT!".red);
+} else {
+  const language = langs.where('3', langCode);
+  console.log(`Our best guess is: ${language.name}`.green);
 }
-
-result = franc(input.join(' '));
-
-console.log(lang.where('3', result).name);
